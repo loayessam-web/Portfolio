@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loay Essam — Senior Graphic Designer &amp; Art Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#070a14;
+    --navy:#0c1024;
+    --navy-soft:#131a33;
+    --gold:#d8b45a;
+    --gold-bright:#f2cf6e;
+    --antique-gold:#c9a86a;
+    --amber:#e8963f;
+    --ink:#e9e6da;
+    --ink-dim:#9aa0b4;
+    --line:rgba(216,180,90,0.16);
+    --shadow-gold:rgba(216,180,90,0.25);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  ::selection{background:var(--gold);color:var(--navy-deep);}
+
+  body{
+    background:var(--navy-deep);
+    color:var(--ink);
+    font-family:'DM Sans', sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    cursor:none;
+  }
+
+  h1,h2,h3,h4,.logo{
+    font-family:'Syne', sans-serif;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- scrollbar ---------- */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--navy-deep);}
+  ::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,var(--gold),var(--amber));
+    border-radius:10px;
+    border:2px solid var(--navy-deep);
+  }
+
+  /* ---------- noise overlay ---------- */
+  .noise{
+    position:fixed;inset:0;
+    z-index:3;
+    pointer-events:none;
+    opacity:0.045;
+    mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- particle canvas ---------- */
+  #particles{
+    position:fixed;inset:0;
+    z-index:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 15% 10%, rgba(216,180,90,0.08), transparent 60%),
+      radial-gradient(ellipse 70% 60% at 85% 90%, rgba(232,150,63,0.07), transparent 60%),
+      var(--navy-deep);
+  }
+
+  /* ---------- custom cursor ---------- */
+  .cursor-dot,.cursor-ring{
+    position:fixed;
+    top:0;left:0;
+    pointer-events:none;
+    border-radius:50%;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+  }
+  .cursor-dot{
+    width:6px;height:6px;
+    background:var(--gold-bright);
+    box-shadow:0 0 10px 2px var(--gold-bright);
+  }
+  .cursor-ring{
+    width:34px;height:34px;
+    border:1px solid var(--antique-gold);
+    transition:width .25s ease,height .25s ease,border-color .25s ease,opacity .25s ease;
+    opacity:.7;
+  }
+  .cursor-ring.hovered{
+    width:54px;height:54px;
+    border-color:var(--gold-bright);
+    background:rgba(216,180,90,0.08);
+  }
+  @media (hover:none), (max-width:860px){
+    .cursor-dot,.cursor-ring{display:none;}
+    body{cursor:auto;}
+  }
+
+  /* ---------- loader ---------- */
+  #loader{
+    position:fixed;inset:0;
+    background:var(--navy-deep);
+    z-index:10000;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:22px;
+    transition:opacity .7s ease, visibility .7s ease;
+  }
+  #loader.hide{opacity:0;visibility:hidden;}
+  .loader-initials{
+    font-size:clamp(3rem,10vw,5.5rem);
+    font-weight:800;
+    letter-spacing:2px;
+    background:linear-gradient(100deg,var(--antique-gold),var(--gold-bright) 45%,var(--amber) 55%,var(--antique-gold));
+    background-size:250% auto;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation:shimmer 2.6s linear infinite;
+  }
+  .loader-bar{
+    width:220px;height:2px;
+    background:rgba(255,255,255,0.08);
+    border-radius:2px;
+    overflow:hidden;
+    position:relative;
+  }
+  .loader-bar span{
+    position:absolute;left:0;top:0;bottom:0;width:0%;
+    background:linear-gradient(90deg,var(--antique-gold),var(--gold-bright),var(--amber));
+    animation:loadbar 1.8s ease forwards;
+  }
+  @keyframes loadbar{ to{width:100%;} }
+  .loader-tag{
+    font-size:.72rem;
+    letter-spacing:3px;
+    color:var(--ink-dim);
+  }
+
+  @keyframes shimmer{
+    0%{background-position:0% 50%;}
+    100%{background-position:250% 50%;}
+  }
+
+  /* ---------- layout helpers ---------- */
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(20px,5vw,48px);
+    position:relative;
+    z-index:2;
+  }
+  section{
+    padding:130px 0;
+    position:relative;
+    z-index:2;
+  }
+  .eyebrow-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.82rem;
+    color:var(--gold-bright);
+    font-family:'DM Sans',sans-serif;
+    font-weight:500;
+  }
+  .section-head{
+    margin-bottom:56px;
+    max-width:640px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,3.6vw,2.7rem);
+    font-weight:700;
+    line-height:1.15;
+    margin-top:10px;
+  }
+  .section-head p{
+    color:var(--ink-dim);
+    margin-top:14px;
+    font-size:1.02rem;
+    line-height:1.7;
+  }
+
+  /* reveal */
+  .reveal{
+    opacity:0;
+    transform:translateY(34px);
+    transition:opacity .9s cubic-bezier(.19,1,.22,1), transform .9s cubic-bezier(.19,1,.22,1);
+  }
+  .reveal.left{transform:translateX(-46px);}
+  .reveal.right{transform:translateX(46px);}
+  .reveal.in{opacity:1;transform:translate(0,0);}
+
+  /* ---------- navbar ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:500;
+    transform:translateY(-110%);
+    transition:transform .8s cubic-bezier(.19,1,.22,1), background .3s ease, box-shadow .3s ease;
+  }
+  header.dropped{transform:translateY(0);}
+  header.scrolled{
+    background:rgba(10,13,26,0.55);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    box-shadow:0 1px 0 var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(20px,5vw,48px);
+    max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    font-size:1.18rem;font-weight:700;letter-spacing:.5px;
+    color:var(--ink);
+  }
+  .logo span{color:var(--gold-bright);}
+  .nav-links{display:flex;gap:34px;}
+  .nav-links a{
+    font-size:.9rem;color:var(--ink-dim);position:relative;padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:linear-gradient(90deg,var(--gold),var(--amber));
+    transition:width .3s ease;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+  .nav-toggle span{width:22px;height:1.5px;background:var(--ink);}
+
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 28px;
+    border-radius:2px;
+    font-size:.88rem;font-weight:600;
+    font-family:'DM Sans',sans-serif;
+    cursor:pointer;
+    transition:transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{
+    background:linear-gradient(100deg,var(--antique-gold),var(--gold-bright));
+    color:var(--navy-deep);
+  }
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 30px -10px var(--shadow-gold);}
+  .btn-ghost{
+    border-color:var(--line);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{border-color:var(--gold-bright);color:var(--gold-bright);transform:translateY(-3px);}
+
+  /* ---------- hero ---------- */
+  #hero{
+    min-height:100vh;
+    display:flex;align-items:center;
+    padding-top:120px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;
+    gap:60px;align-items:center;
+  }
+  .avail-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 14px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    font-size:.78rem;color:var(--ink-dim);
+    margin-bottom:26px;
+  }
+  .avail-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#6adf9d;
+    box-shadow:0 0 8px 2px rgba(106,223,157,.6);
+    animation:pulseDot 1.8s ease-in-out infinite;
+  }
+  @keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  .hero-title{
+    font-size:clamp(2.6rem,6vw,4.6rem);
+    font-weight:800;
+    line-height:1.02;
+    letter-spacing:-1px;
+  }
+  .hero-title .shimmer-text{
+    background:linear-gradient(100deg,var(--ink) 10%,var(--gold-bright) 35%,var(--amber) 50%,var(--gold-bright) 65%,var(--ink) 90%);
+    background-size:300% auto;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 5s linear infinite;
+  }
+  .hero-role{
+    margin-top:18px;
+    font-size:clamp(1.05rem,2vw,1.3rem);
+    color:var(--antique-gold);
+    font-weight:500;
+  }
+  .hero-desc{
+    margin-top:22px;
+    max-width:520px;
+    color:var(--ink-dim);
+    line-height:1.75;
+    font-size:1rem;
+  }
+  .hero-ctas{margin-top:38px;display:flex;gap:16px;flex-wrap:wrap;}
+
+  /* floating 3D card */
+  .hero-right{position:relative;display:flex;align-items:center;justify-content:center;height:460px;}
+  .orb{
+    position:absolute;
+    width:340px;height:340px;
+    background:radial-gradient(circle,rgba(216,180,90,0.35),transparent 70%);
+    filter:blur(30px);
+    border-radius:50%;
+    animation:orbFloat 7s ease-in-out infinite;
+  }
+  @keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(10px,-18px) scale(1.06);}}
+
+  .ring-dashed{
+    position:absolute;
+    width:300px;height:300px;
+    border:1.5px dashed var(--antique-gold);
+    border-radius:50%;
+    opacity:.45;
+    animation:spin 18s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .float-card{
+    position:relative;
+    width:280px;
+    padding:34px 26px;
+    background:linear-gradient(160deg,rgba(23,29,54,0.9),rgba(10,13,26,0.9));
+    border:1px solid var(--line);
+    border-radius:14px;
+    backdrop-filter:blur(6px);
+    text-align:center;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.04);
+    transform-style:preserve-3d;
+    animation:cardFloat 6s ease-in-out infinite;
+  }
+  @keyframes cardFloat{
+    0%,100%{transform:rotateX(4deg) rotateY(-6deg) translateY(0);}
+    50%{transform:rotateX(-2deg) rotateY(6deg) translateY(-14px);}
+  }
+  .card-avatar{
+    width:78px;height:78px;margin:0 auto 16px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:700;font-size:1.5rem;
+    background:linear-gradient(140deg,var(--antique-gold),var(--amber));
+    color:var(--navy-deep);
+  }
+  .card-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.15rem;}
+  .card-role{color:var(--ink-dim);font-size:.85rem;margin-top:4px;}
+  .card-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:8px;margin-top:26px;padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+  .card-stats div b{
+    display:block;font-family:'Syne',sans-serif;font-size:1.15rem;color:var(--gold-bright);
+  }
+  .card-stats div span{font-size:.66rem;color:var(--ink-dim);letter-spacing:.3px;}
+
+  /* ---------- marquee ---------- */
+  .marquee-wrap{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:26px 0;
+    overflow:hidden;
+    position:relative;
+    z-index:2;
+  }
+  .marquee-track{
+    display:flex;gap:60px;white-space:nowrap;
+    width:max-content;
+    animation:marquee 26s linear infinite;
+  }
+  .marquee-track span{
+    font-family:'Syne',sans-serif;
+    font-size:1rem;
+    color:var(--ink-dim);
+    letter-spacing:1px;
+  }
+  .marquee-track span em{color:var(--antique-gold);font-style:normal;}
+  @keyframes marquee{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- skills ---------- */
+  .skills-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:70px;
+  }
+  .skill-item{margin-bottom:26px;}
+  .skill-top{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:9px;}
+  .skill-top span:last-child{color:var(--antique-gold);}
+  .skill-track{
+    height:7px;border-radius:6px;
+    background:rgba(255,255,255,0.06);
+    overflow:hidden;position:relative;
+  }
+  .skill-fill{
+    height:100%;width:0%;border-radius:6px;position:relative;
+    background:linear-gradient(90deg,var(--antique-gold),var(--gold-bright));
+    transition:width 1.4s cubic-bezier(.19,1,.22,1);
+    overflow:hidden;
+  }
+  .skill-fill::after{
+    content:'';position:absolute;top:0;left:-40%;height:100%;width:40%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+    animation:none;
+  }
+  .skill-fill.swept::after{animation:sweep 1.1s ease .4s;}
+  @keyframes sweep{
+    from{left:-40%;}
+    to{left:110%;}
+  }
+
+  .chip-cloud{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;}
+  .chip{
+    padding:9px 16px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    font-size:.82rem;
+    color:var(--ink-dim);
+    transition:transform .3s ease, color .3s ease, border-color .3s ease, background .3s ease;
+  }
+  .chip:hover{
+    transform:translateY(-5px);
+    color:var(--navy-deep);
+    background:linear-gradient(100deg,var(--antique-gold),var(--gold-bright));
+    border-color:transparent;
+  }
+
+  .skills-side-label{
+    font-size:.78rem;letter-spacing:2px;color:var(--ink-dim);margin-bottom:18px;
+  }
+
+  /* ---------- timeline ---------- */
+  .timeline{position:relative;padding-left:34px;}
+  .timeline::before{
+    content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--gold-bright),var(--antique-gold) 40%,var(--amber) 70%,transparent);
+    border-radius:2px;
+  }
+  .tl-item{
+    position:relative;
+    margin-bottom:44px;
+    padding:28px 30px;
+    background:rgba(19,26,51,0.4);
+    border:1px solid var(--line);
+    border-radius:12px;
+    transition:transform .4s ease, box-shadow .4s ease, border-color .4s ease;
+  }
+  .tl-item:hover{
+    transform:translateX(10px);
+    border-color:var(--antique-gold);
+    box-shadow:0 20px 50px -25px var(--shadow-gold);
+  }
+  .tl-item::before{
+    content:'';position:absolute;left:-40px;top:32px;
+    width:11px;height:11px;border-radius:50%;
+    background:var(--navy-deep);
+    border:2px solid var(--gold-bright);
+    box-shadow:0 0 0 4px rgba(216,180,90,0.12);
+  }
+  .tl-top{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    margin-bottom:6px;
+  }
+  .tl-role{font-family:'Syne',sans-serif;font-weight:700;font-size:1.12rem;}
+  .tl-date{font-size:.78rem;color:var(--antique-gold);white-space:nowrap;}
+  .tl-company{color:var(--ink-dim);font-size:.9rem;margin-bottom:16px;}
+  .tl-item ul{margin-top:4px;}
+  .tl-item li{
+    position:relative;padding-left:18px;margin-bottom:9px;
+    color:#c7cadb;font-size:.92rem;line-height:1.55;
+  }
+  .tl-item li::before{
+    content:'';position:absolute;left:0;top:9px;
+    width:5px;height:5px;border-radius:50%;
+    background:var(--antique-gold);
+  }
+  .badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .badge{
+    font-size:.7rem;padding:5px 11px;border-radius:20px;
+    background:rgba(216,180,90,0.1);
+    color:var(--gold-bright);
+    border:1px solid rgba(216,180,90,0.25);
+  }
+
+  /* ---------- achievements grid ---------- */
+  .ach-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  }
+  .ach-card{
+    position:relative;
+    padding:34px 26px;
+    background:rgba(19,26,51,0.4);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    transition:transform .4s ease, box-shadow .4s ease;
+  }
+  .ach-card::before{
+    content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold-bright),var(--amber),transparent);
+    transition:left .6s ease;
+  }
+  .ach-card:hover{transform:translateY(-8px);box-shadow:0 26px 50px -20px rgba(0,0,0,.55);}
+  .ach-card:hover::before{left:0;}
+  .ach-emoji{font-size:1.9rem;margin-bottom:16px;display:block;}
+  .ach-card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px;}
+  .ach-card p{color:var(--ink-dim);font-size:.88rem;line-height:1.65;}
+  .ach-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+  .ach-tags span{
+    font-size:.68rem;padding:4px 10px;border-radius:20px;
+    border:1px solid var(--line);color:var(--ink-dim);
+  }
+
+  /* ---------- education & languages ---------- */
+  .edu-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:26px;}
+  .edu-card,.lang-card{
+    padding:32px 30px;
+    background:rgba(19,26,51,0.4);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .edu-card h3{font-size:1.15rem;font-weight:700;margin-bottom:8px;}
+  .edu-card .edu-sub{color:var(--antique-gold);font-size:.9rem;margin-bottom:4px;}
+  .edu-card .edu-meta{color:var(--ink-dim);font-size:.85rem;}
+  .lang-card h4{font-size:.78rem;letter-spacing:2px;color:var(--ink-dim);margin-bottom:20px;}
+  .lang-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .lang-badge{
+    padding:6px 14px;border-radius:20px;font-size:.75rem;
+    background:rgba(216,180,90,0.1);
+    color:var(--gold-bright);
+    border:1px solid rgba(216,180,90,0.25);
+    animation:badgeGlow 3s ease-in-out infinite;
+  }
+  @keyframes badgeGlow{
+    0%,100%{box-shadow:0 0 0 0 rgba(216,180,90,0.0);}
+    50%{box-shadow:0 0 14px 0 rgba(216,180,90,0.35);}
+  }
+
+  /* ---------- contact ---------- */
+  .contact-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  }
+  .contact-card{
+    display:flex;align-items:center;gap:16px;
+    padding:20px 22px;margin-bottom:16px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(19,26,51,0.35);
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .contact-card:hover{transform:translateX(10px);border-color:var(--antique-gold);}
+  .contact-icon{
+    width:42px;height:42px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(140deg,var(--antique-gold),var(--amber));
+    color:var(--navy-deep);font-weight:700;flex-shrink:0;
+  }
+  .contact-label{font-size:.72rem;color:var(--ink-dim);letter-spacing:1px;}
+  .contact-value{font-size:.98rem;margin-top:2px;}
+
+  .ripple-wrap{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    height:340px;
+  }
+  .ripple{
+    position:absolute;border-radius:50%;
+    border:1px solid var(--antique-gold);
+    animation:rippleOut 3.6s ease-out infinite;
+    opacity:0;
+  }
+  .ripple:nth-child(1){animation-delay:0s;}
+  .ripple:nth-child(2){animation-delay:1.2s;}
+  .ripple:nth-child(3){animation-delay:2.4s;}
+  @keyframes rippleOut{
+    0%{width:140px;height:140px;opacity:.6;}
+    100%{width:340px;height:340px;opacity:0;}
+  }
+  .pulse-avatar{
+    position:relative;z-index:2;
+    width:140px;height:140px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-weight:800;font-size:2.2rem;
+    background:linear-gradient(140deg,var(--antique-gold),var(--gold-bright),var(--amber));
+    color:var(--navy-deep);
+    box-shadow:0 0 40px 6px rgba(216,180,90,0.35);
+    animation:avatarPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes avatarPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.045);}}
+
+  .social-row{display:flex;gap:14px;justify-content:center;margin-top:26px;}
+  .social-row a{
+    padding:9px 18px;border:1px solid var(--line);border-radius:30px;
+    font-size:.8rem;color:var(--ink-dim);transition:.3s;
+  }
+  .social-row a:hover{color:var(--gold-bright);border-color:var(--gold-bright);}
+
+  footer{
+    text-align:center;padding:36px 0;
+    color:var(--ink-dim);font-size:.8rem;
+    border-top:1px solid var(--line);
+    position:relative;z-index:2;
+  }
+  footer span{color:var(--antique-gold);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-right{height:380px;margin-top:20px;}
+    .skills-grid{grid-template-columns:1fr;gap:20px;}
+    .ach-grid{grid-template-columns:1fr 1fr;}
+    .edu-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .ripple-wrap{height:260px;order:-1;}
+  }
+  @media (max-width:640px){
+    .nav-links{
+      position:fixed;top:0;right:0;height:100vh;width:220px;
+      background:rgba(10,13,26,0.97);
+      flex-direction:column;
+      padding:100px 30px;gap:26px;
+      transform:translateX(100%);
+      transition:transform .4s ease;
+      backdrop-filter:blur(10px);
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{display:flex;}
+    .ach-grid{grid-template-columns:1fr;}
+    section{padding:90px 0;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- loader -->
+  <div id="loader">
+    <div class="loader-initials">LE</div>
+    <div class="loader-bar"><span></span></div>
+    <div class="loader-tag">LOADING PORTFOLIO</div>
+  </div>
+
+  <div class="noise"></div>
+  <canvas id="particles"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- navbar -->
+  <header id="siteHeader">
+    <nav>
+      <div class="logo">Loay <span>Essam</span></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- hero -->
+  <section id="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="avail-tag reveal in"><span class="avail-dot"></span> Available for freelance &amp; full-time roles</div>
+        <h1 class="hero-title reveal in">Loay <span class="shimmer-text">Essam</span></h1>
+        <div class="hero-role reveal in">Senior Graphic Designer &amp; Art Director</div>
+        <p class="hero-desc reveal in">
+          Over 9 years shaping brand identities, packaging, and print production across the Saudi market —
+          leading creative teams and turning business goals into visual identities that hold up from concept
+          to final commercial output.
+        </p>
+        <div class="hero-ctas reveal in">
+          <a href="#experience" class="btn btn-primary">View Experience</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="hero-right reveal right">
+        <div class="orb"></div>
+        <div class="ring-dashed"></div>
+        <div class="float-card">
+          <div class="card-avatar">LE</div>
+          <div class="card-name">Loay Essam</div>
+          <div class="card-role">Senior Graphic Designer</div>
+          <div class="card-stats">
+            <div><b>9+</b><span>YEARS</span></div>
+            <div><b>50+</b><span>PROJECTS</span></div>
+            <div><b>10+</b><span>BRANDS</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- marquee -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span><em>Creativity Corner</em> Advertising Agency</span>
+      <span><em>Paradise United</em></span>
+      <span><em>Amkinah Group</em></span>
+      <span><em>Al-Kheshi</em> Advertising Agency</span>
+      <span><em>Creativity Corner</em> Advertising Agency</span>
+      <span><em>Paradise United</em></span>
+      <span><em>Amkinah Group</em></span>
+      <span><em>Al-Kheshi</em> Advertising Agency</span>
+    </div>
+  </div>
+
+  <!-- skills -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow-tag">Capabilities</span>
+        <h2>Design &amp; technical skills</h2>
+        <p>Nine years of hands-on work across branding, packaging, and print have shaped a toolkit built for
+          premium execution — from first concept to the final printed or produced piece.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="reveal left">
+          <div class="skills-side-label">TECHNICAL &amp; DESIGN</div>
+          <div class="skill-item" data-level="96">
+            <div class="skill-top"><span>Adobe Illustrator</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="94">
+            <div class="skill-top"><span>Adobe Photoshop</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="95">
+            <div class="skill-top"><span>Branding &amp; Visual Identity Design</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="90">
+            <div class="skill-top"><span>Packaging Design (FMCG &amp; Retail)</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="88">
+            <div class="skill-top"><span>Print Production &amp; Pre-Press Supervision</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="90">
+            <div class="skill-top"><span>Advertising Materials &amp; Signage Design</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="reveal right">
+          <div class="skills-side-label">PROFESSIONAL &amp; LEADERSHIP</div>
+          <div class="skill-item" data-level="92">
+            <div class="skill-top"><span>Art Direction &amp; Creative Leadership</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="88">
+            <div class="skill-top"><span>Team Management &amp; Mentoring</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="90">
+            <div class="skill-top"><span>Problem Solving &amp; Concept Development</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+          <div class="skill-item" data-level="93">
+            <div class="skill-top"><span>Time Management &amp; Multi-Project Handling</span><span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill"></div></div>
+          </div>
+
+          <div class="skills-side-label" style="margin-top:34px;">TOOLS &amp; FOCUS AREAS</div>
+          <div class="chip-cloud">
+            <div class="chip">Adobe Illustrator</div>
+            <div class="chip">Adobe Photoshop</div>
+            <div class="chip">Brand Identity</div>
+            <div class="chip">Packaging</div>
+            <div class="chip">Pre-Press</div>
+            <div class="chip">Signage</div>
+            <div class="chip">Art Direction</div>
+            <div class="chip">Team Leadership</div>
+            <div class="chip">Print Production</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- experience -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow-tag">Career path</span>
+        <h2>Professional experience</h2>
+        <p>From print-ready production to leading brand and packaging direction for clients across the
+          Saudi market.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-top">
+            <div class="tl-role">Senior Graphic Designer</div>
+            <div class="tl-date">Feb 2024 — Present</div>
+          </div>
+          <div class="tl-company">Creativity Corner Advertising Agency · Dammam</div>
+          <ul>
+            <li>Design and production of printed advertising materials.</li>
+            <li>Design and execution of illuminated zinc lettering and signage.</li>
+          </ul>
+          <div class="badge-row"><span class="badge">Print Production</span><span class="badge">Signage</span></div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-top">
+            <div class="tl-role">Art Director / Senior Graphic Designer</div>
+            <div class="tl-date">2020 — 2023</div>
+          </div>
+          <div class="tl-company">Paradise United · Dammam</div>
+          <ul>
+            <li>Delivered innovative branding and packaging solutions aligned with market positioning.</li>
+            <li>Supervised print production processes to maintain brand consistency and high-quality standards.</li>
+            <li>Led and guided designers to elevate creative output &amp; service quality.</li>
+            <li>Contributed to strengthening brand presence and supporting sales growth through strategic design.</li>
+          </ul>
+          <div class="badge-row"><span class="badge">Branding</span><span class="badge">Packaging</span><span class="badge">Team Leadership</span></div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-top">
+            <div class="tl-role">Creative Manager</div>
+            <div class="tl-date">2018 — 2020</div>
+          </div>
+          <div class="tl-company">Amkinah Group · Qatif</div>
+          <ul>
+            <li>Led a creative and marketing team of 3 members.</li>
+            <li>Developed visual concepts that enhanced product presentation and brand image.</li>
+            <li>Improved social media visual content, contributing to increased engagement and brand visibility.</li>
+          </ul>
+          <div class="badge-row"><span class="badge">Team Management</span><span class="badge">Social Content</span></div>
+        </div>
+
+        <div class="tl-item reveal">
+          <div class="tl-top">
+            <div class="tl-role">Graphic Designer</div>
+            <div class="tl-date">2017 — 2018</div>
+          </div>
+          <div class="tl-company">Al-Kheshi Advertising Agency · Dammam</div>
+          <ul>
+            <li>Designed print-ready marketing and advertising materials.</li>
+            <li>Managed multiple projects simultaneously while meeting tight deadlines.</li>
+          </ul>
+          <div class="badge-row"><span class="badge">Print-Ready Design</span><span class="badge">Multi-Project Handling</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- key achievements as "work" -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow-tag">Track record</span>
+        <h2>Key achievements</h2>
+        <p>Nine years of client work distilled into the numbers and outcomes that matter most.</p>
+      </div>
+
+      <div class="ach-grid">
+        <div class="ach-card reveal">
+          <span class="ach-emoji">🎨</span>
+          <h3>10+ Brand Identities</h3>
+          <p>Delivered complete brand identities from concept to commercial launch for clients across the Saudi market.</p>
+          <div class="ach-tags"><span>Branding</span><span>Concept to Launch</span></div>
+        </div>
+        <div class="ach-card reveal">
+          <span class="ach-emoji">📦</span>
+          <h3>50+ Design Projects</h3>
+          <p>Completed across branding, packaging, print, and signage work throughout the Saudi market.</p>
+          <div class="ach-tags"><span>Packaging</span><span>Print</span></div>
+        </div>
+        <div class="ach-card reveal">
+          <span class="ach-emoji">📈</span>
+          <h3>Visual Branding Impact</h3>
+          <p>Improved visual branding for multiple clients, increasing digital engagement and brand recognition.</p>
+          <div class="ach-tags"><span>Digital Engagement</span><span>Brand Recognition</span></div>
+        </div>
+        <div class="ach-card reveal">
+          <span class="ach-emoji">💼</span>
+          <h3>Commercial Results</h3>
+          <p>Design contributions that supported sales growth and enhanced the overall customer experience.</p>
+          <div class="ach-tags"><span>Sales Growth</span><span>Customer Experience</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- education -->
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow-tag">Background</span>
+        <h2>Education &amp; languages</h2>
+      </div>
+
+      <div class="edu-grid">
+        <div class="edu-card reveal left">
+          <h3>Bachelor of Applied Arts</h3>
+          <div class="edu-sub">Design Engineering</div>
+          <div class="edu-meta">Helwan University — 2016</div>
+        </div>
+        <div class="lang-card reveal right">
+          <h4>LANGUAGES</h4>
+          <div class="lang-row"><span>Arabic</span><span class="lang-badge">Native</span></div>
+          <div class="lang-row"><span>English</span><span class="lang-badge">Professional</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal left">
+        <span class="eyebrow-tag">Let's talk</span>
+        <h2 style="font-size:2rem;font-weight:700;margin:10px 0 32px;">Start a project together</h2>
+
+        <div class="contact-card">
+          <div class="contact-icon">@</div>
+          <div><div class="contact-label">EMAIL</div><div class="contact-value">loay_lolo@ymail.com</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">☎</div>
+          <div><div class="contact-label">PHONE</div><div class="contact-value">+966 59 042 4252</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div><div class="contact-label">LOCATION</div><div class="contact-value">Dammam, Saudi Arabia</div></div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">✓</div>
+          <div><div class="contact-label">AVAILABILITY</div><div class="contact-value">Open to new projects</div></div>
+        </div>
+      </div>
+
+      <div class="reveal right">
+        <div class="ripple-wrap">
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+          <div class="ripple"></div>
+          <div class="pulse-avatar">LE</div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/in/loayessam/" target="_blank" rel="noopener">LinkedIn · @loayessam</a>
+          <a href="https://www.behance.net/loay-essam" target="_blank" rel="noopener">Behance · @loay-essam</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © <span id="year"></span> <span>Loay Essam</span> — Senior Graphic Designer &amp; Art Director
+  </footer>
+
+<script>
+/* ---------------- loader ---------------- */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+    document.getElementById('siteHeader').classList.add('dropped');
+  }, 2000);
+});
+
+/* ---------------- header scroll state ---------------- */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+});
+
+/* mobile nav toggle */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* ---------------- custom cursor ---------------- */
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+window.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  dot.style.left = mouseX + 'px';
+  dot.style.top = mouseY + 'px';
+});
+
+function animateRing(){
+  ringX += (mouseX - ringX) * 0.16;
+  ringY += (mouseY - ringY) * 0.16;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .chip, .tl-item, .ach-card, .contact-card, .float-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+});
+
+/* ---------------- particle network ---------------- */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const colors = ['#d8b45a', '#c9a86a', '#e8963f', '#f2cf6e'];
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+function initParticles(){
+  const count = Math.min(90, Math.floor((canvas.width * canvas.height) / 16000));
+  particles = Array.from({length: count}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 0.35,
+    vy: (Math.random() - 0.5) * 0.35,
+    r: Math.random() * 1.6 + 0.6,
+    c: colors[Math.floor(Math.random() * colors.length)]
+  }));
+}
+initParticles();
+
+function drawParticles(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for(let p of particles){
+    p.x += p.vx; p.y += p.vy;
+    if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.c;
+    ctx.globalAlpha = 0.75;
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  for(let i = 0; i < particles.length; i++){
+    for(let j = i + 1; j < particles.length; j++){
+      const a = particles[i], b = particles[j];
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 130){
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.strokeStyle = a.c;
+        ctx.globalAlpha = (1 - dist / 130) * 0.22;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+    }
+  }
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* ---------------- scroll reveal ---------------- */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ---------------- skill bars ---------------- */
+const skillItems = document.querySelectorAll('.skill-item');
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const item = entry.target;
+      const fill = item.querySelector('.skill-fill');
+      const level = item.getAttribute('data-level');
+      fill.style.width = level + '%';
+      setTimeout(() => fill.classList.add('swept'), 1400);
+      skillObserver.unobserve(item);
+    }
+  });
+}, { threshold: 0.4 });
+skillItems.forEach(el => skillObserver.observe(el));
+
+/* ---------------- footer year ---------------- */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
